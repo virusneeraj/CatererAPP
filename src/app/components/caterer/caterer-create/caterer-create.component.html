@@ -1,0 +1,128 @@
+<button mat-button (click)="cancel()">Back</button>
+
+<form class="example-form" [formGroup]="catererForm" (ngSubmit)="createCaterer()">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput>
+    <mat-error *ngIf="catererForm.controls.name.hasError('required')">
+      Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <table class="example-full-width" formGroupName="capacity">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Minimum</mat-label>
+        <input type="number" formControlName="minimum" matInput>
+        <mat-error *ngIf="catererForm.controls.capacity.controls.minimum.hasError('required')">
+          Minimum is <strong>required</strong>
+        </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Maximum</mat-label>
+        <input type="number" [min]="catererForm.get('capacity.minimum').value" formControlName="maximum" matInput>
+        <mat-error *ngIf="catererForm.controls.capacity.controls.maximum.hasError('min')">
+          Maximum must be greater then minimum
+        </mat-error>
+        <mat-error *ngIf="catererForm.controls.capacity.controls.maximum.hasError('required')">
+          Maximum is <strong>required</strong>
+        </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <table class="example-full-width" formGroupName="contact">
+    <tr>
+      <td colspan="2">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="emailAddress" placeholder="Ex. pat@example.com">
+          <mat-error
+            *ngIf="catererForm.controls.contact.controls.emailAddress.hasError('email') && !catererForm.controls.contact.controls.emailAddress.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="catererForm.controls.contact.controls.emailAddress.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Mobile Number</mat-label>
+            <input type="text" matInput formControlName="mobileNumber" placeholder="Ex. 9876543210">
+            <mat-error
+              *ngIf="catererForm.controls.contact.controls.mobileNumber.errors?.pattern">
+              Please enter a valid mobile number(10 digits number)
+            </mat-error>
+            <mat-error *ngIf="catererForm.controls.contact.controls.mobileNumber.hasError('required')">
+              Mobile Number is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+      </td>
+      <td>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input type="text" matInput formControlName="phoneNumber">
+          </mat-form-field>
+
+      </td>
+    </tr>
+  </table>
+
+
+  <table class="example-full-width"  formGroupName="location">
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>City</mat-label>
+        <input type="text" matInput formControlName="city" placeholder="Ex. San Francisco">
+        <mat-error
+          *ngIf="catererForm.controls.location.controls.city.errors?.pattern">
+          Please enter a valid city(City must not contain digits or special characters)
+        </mat-error>
+        <mat-error *ngIf="catererForm.controls.location.controls.city.hasError('required')">
+          City is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Street</mat-label>
+        <input type="text" matInput formControlName="street" placeholder="Ex. California">
+        <mat-error *ngIf="catererForm.controls.location.controls.street.hasError('required')">
+          Street is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Postal Code</mat-label>
+        <input type="text" matInput formControlName="postalCode" placeholder="Ex. 94105">
+      </mat-form-field>
+    </td>
+  </tr>
+  </table>
+
+  <div *ngIf="!saveInProgress">
+    <button type="reset" mat-button style="margin-right: 30px" (click)="rest()">Rest</button>
+    <button mat-raised-button color="primary">Submit</button>
+  </div>
+  <div *ngIf="saveInProgress">
+    <mat-spinner [diameter]="24"></mat-spinner>
+  </div>
+
+
+
+
+
+</form>
+

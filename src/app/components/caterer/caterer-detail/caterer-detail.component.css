@@ -1,0 +1,18 @@
+#wrapper {
+  width: 100%;
+
+  overflow: hidden; /* will contain if #first is longer than #second */
+}
+#first {
+  width: 50%;
+  float:left; /* add this */
+  border: 1px solid gray;
+
+  margin: 10px;
+}
+#second {
+  border: 1px solid gray;
+
+  margin: 10px;
+  overflow: hidden; /* if you don't want #second to wrap below #first */
+}

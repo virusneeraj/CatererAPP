@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-title>Delete caterer</mat-card-title>
+  <form>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Name"
+        [value]="caterer.name"
+        name="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Price (R$)"
+        [value]="caterer.price"
+        name="price"
+      />
+    </mat-form-field>
+  </form>
+  <button mat-raised-button (click)="deleteCaterer()" color="warn">
+    Delete
+  </button>
+
+  <button mat-raised-button (click)="cancel()">Cancel</button>
+</mat-card>

@@ -1,0 +1,60 @@
+<div class="mat-elevation-z4">
+
+  <div *ngIf="loading" layout="row" layout-align="center center">
+    <mat-spinner [diameter]="24"></mat-spinner>
+  </div>
+
+  <table *ngIf="!loading" mat-table [dataSource]="pageData.content">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row.id }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef>City</th>
+      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row?.location?.city }}</td>
+    </ng-container>
+
+    <!-- capacity Column -->
+    <ng-container matColumnDef="capacity">
+      <th mat-header-cell *matHeaderCellDef>Capacity</th>
+      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row?.capacity.maximum }}</td>
+    </ng-container>
+
+    <!-- contact Column -->
+    <ng-container matColumnDef="contact">
+      <th mat-header-cell *matHeaderCellDef>Contact</th>
+      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row?.contact.mobileNumber }}</td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <a routerLink="/caterers/update/{{ row.id }}" class="edit">
+          <i class="material-icons"> edit </i>
+        </a>
+        <a routerLink="/caterers/delete/{{ row.id }}" class="delete">
+          <i class="material-icons"> delete </i>
+        </a>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator *ngIf="pageData.totalElements" [length]="pageData.totalElements"
+              [pageSize]="pageData.size"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+                 [pageIndex]="page"
+                 showFirstLastButtons
+                 aria-label="Select page" (page)="pageEvents($event)">
+</mat-paginator>
+</div>

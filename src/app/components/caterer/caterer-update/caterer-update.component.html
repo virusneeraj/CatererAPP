@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-title>Update caterer</mat-card-title>
+  <form>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Name"
+        [(ngModel)]="caterer.name"
+        name="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Price (R$)"
+        [(ngModel)]="caterer.location"
+        name="price"
+      />
+    </mat-form-field>
+  </form>
+  <button mat-raised-button (click)="updateCaterer()" color="primary">
+    Update
+  </button>
+
+  <button mat-raised-button (click)="cancel()">Cancel</button>
+</mat-card>
