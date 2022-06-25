@@ -5,6 +5,7 @@ import {Caterer} from "../model/caterer/caterer.content.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../util/my-error-etate-matcher";
 import {environment} from "../../../../environments/environment";
+import {Location} from "@angular/common";
 
 @Component({
   selector: "app-caterer-create",
@@ -17,7 +18,7 @@ export class CatererCreateComponent implements OnInit {
   saveInProgress: boolean = false;
   matcher = new MyErrorStateMatcher();
 
-  constructor(private catererService: CatererService, private router: Router, public formBuilder: FormBuilder, private cd: ChangeDetectorRef) {}
+  constructor(private catererService: CatererService, private location: Location, private router: Router, public formBuilder: FormBuilder, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.buildCatererForm();
@@ -72,7 +73,7 @@ export class CatererCreateComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(["/caterers"]);
+    this.location.back();
   }
 
   rest() {

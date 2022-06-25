@@ -26,13 +26,13 @@
     <!-- capacity Column -->
     <ng-container matColumnDef="capacity">
       <th mat-header-cell *matHeaderCellDef>Capacity</th>
-      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row?.capacity.maximum }}</td>
+      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row?.capacity?.maximum }}</td>
     </ng-container>
 
     <!-- contact Column -->
     <ng-container matColumnDef="contact">
       <th mat-header-cell *matHeaderCellDef>Contact</th>
-      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row?.contact.mobileNumber }}</td>
+      <td mat-cell (click)="rowSelected(row)" *matCellDef="let row">{{ row?.contact?.mobileNumber }}</td>
     </ng-container>
 
     <!-- Action Column -->
