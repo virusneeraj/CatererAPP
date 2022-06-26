@@ -1,5 +1,12 @@
 <button mat-button (click)="cancel()">Back</button>
 
+<mat-card class="msg-error" *ngIf="errors.length>0">
+  <div *ngFor="let e of errors">
+    <p>{{e}}</p>
+  </div>
+</mat-card>
+<br>
+
 <form class="example-form" [formGroup]="catererForm" (ngSubmit)="createCaterer()">
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Name</mat-label>

@@ -11,9 +11,9 @@ export const environment = {
     page: 0,
     size: 10,
     sort: 'id',
-    order: SortOrder.desc
+    order: 'asc'
   },
-  api_url : (page: number, size: number, sort: string, order: string) => `https://virus-caterer.herokuapp.com/search?page=${page}&size=${size}&sort=${sort}:${order}`,
+  api_url : (page: number, size: number, sort: string, order: string, city: string) => `https://virus-caterer.herokuapp.com/search?page=${page}&size=${size}&sort=${sort},${order}&search=${city}`,
   api_caterer_detail: (idOrName: string) => `https://virus-caterer.herokuapp.com/get/${idOrName}`,
   api_caterer_create:  `https://virus-caterer.herokuapp.com/add`
 };

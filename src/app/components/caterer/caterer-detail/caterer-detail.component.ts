@@ -14,10 +14,12 @@ export class CatererDetailComponent implements OnInit {
 
   id: string | null | undefined;
   caterer: Caterer | undefined;
+  errors: string = '';
 
   constructor(private route: ActivatedRoute, private location: Location, private catererService: CatererService) { }
 
   ngOnInit(): void {
+    this.errors = '';
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id)
       this.loadData(this.id);
@@ -27,6 +29,9 @@ export class CatererDetailComponent implements OnInit {
     this.catererService.readById(id)
       .subscribe(apiResponse => {
         this.caterer = apiResponse.data;
+      }, err => {
+        this.errors = 'Data not found for name or id :' + id + ' '+err.error?.message;
+        this.catererService.showMessage("Data not found: "+ err.error?.message, true);
       });
   }
 

@@ -31,8 +31,8 @@ export class CatererService {
     );
   }
 
-  getCaterer(page: number, size: number, sort: string, order:SortOrder): Observable<Response> {
-    const url = environment.api_url(page,size,sort,order.toString());
+  getCaterer(page: number, size: number, sort: string, order:string, city: string): Observable<Response> {
+    const url = environment.api_url(page,size,sort,order, city);
     return this.http.get<Response>(url).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))

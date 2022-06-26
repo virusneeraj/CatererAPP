@@ -12,6 +12,6 @@ export interface Data {
   numberOfElements: number;
   size: number;
   number: number;
-  sort: Sort;
+  sort: any;
   empty: boolean;
 }

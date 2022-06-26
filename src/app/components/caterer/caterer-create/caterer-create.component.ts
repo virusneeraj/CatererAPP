@@ -17,6 +17,7 @@ export class CatererCreateComponent implements OnInit {
    catererForm: FormGroup | any;
   saveInProgress: boolean = false;
   matcher = new MyErrorStateMatcher();
+  errors: string[] = [];
 
   constructor(private catererService: CatererService, private location: Location, private router: Router, public formBuilder: FormBuilder, private cd: ChangeDetectorRef) {}
 
@@ -46,22 +47,23 @@ export class CatererCreateComponent implements OnInit {
   }
 
   createCaterer(): void {
-    console.log(this.catererForm.value);
+   // console.log(this.catererForm.value);
     if(this.catererForm.valid){
       this.saveInProgress = true;
       this.catererService.create(this.catererForm.value).subscribe( response => {
-        console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+        //console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
         if(environment.api_success_status.includes(response.status)){
           this.catererService.showMessage("Caterer created!");
           this.router.navigate(['caterers','detail',response.data?.id]);
         } else {
           this.catererService.showMessage("Could not crate: "+ response.data, true);
         }
-        console.log('asghdfhgcjdsh')
+       // console.log('asghdfhgcjdsh')
         this.saveInProgress = false;
 
       }, err => {
         this.catererService.showMessage("Could not crate: "+ err.error?.data, true);
+        this.errors = err.error?.data;
         this.saveInProgress = false;
       });
     }
